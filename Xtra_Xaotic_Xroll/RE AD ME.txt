@@ -1,8 +1,8 @@
-README - Hack Wars
+README - HACK WARS
 1. Información del Proyecto
-Nombre del Proyecto: (Nombre que le dieron los creadores originales)
-Equipo Creador: (Nombres de los integrantes que iniciaron el proyecto)
-Fecha de Creación: (Fecha en la que se inició el proyecto base)
+Nombre del Proyecto: Xtra_Xaotic_Xroll
+Equipo Creador: Adrian Sanz, Alberto Serrano, Lorena Pajarola y Amber Zaragoza
+Fecha de Creación: 13/03/2025
 
 2. Historial de Hackeos
 Cada equipo que modifique este proyecto debe añadir una nueva entrada siguiendo este formato:
