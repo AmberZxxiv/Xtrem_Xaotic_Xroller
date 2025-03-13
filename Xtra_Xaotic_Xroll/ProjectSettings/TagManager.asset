@@ -8,6 +8,7 @@ TagManager:
   - YOURBASE
   - ENEMYBASE
   - ENEMY
+  - YourBase
   layers:
   - Default
   - TransparentFX

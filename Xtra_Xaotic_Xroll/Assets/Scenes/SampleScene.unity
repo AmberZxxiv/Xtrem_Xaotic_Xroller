@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 302920946}
   m_Layer: 5
   m_Name: VAULTMENU
-  m_TagString: Untagged
+  m_TagString: YOURBASE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1064,7 +1064,7 @@ GameObject:
   - component: {fileID: 1052059521}
   m_Layer: 0
   m_Name: YOUR BASE
-  m_TagString: YOURBASE
+  m_TagString: YourBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
