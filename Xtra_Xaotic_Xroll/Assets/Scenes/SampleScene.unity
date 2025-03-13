@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 282056339}
   - component: {fileID: 282056338}
   - component: {fileID: 282056337}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PLAYER_WEAPON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.59237766, y: 0.925462, z: 0.59237766}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2047967130}
   m_Father: {fileID: 22183796}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1229,7 +1229,7 @@ GameObject:
   - component: {fileID: 1203768677}
   - component: {fileID: 1203768681}
   - component: {fileID: 1203768680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PLAYERCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1256,6 +1256,8 @@ MonoBehaviour:
   locationText: {fileID: 609896092}
   playerWeapon: {fileID: 282056336}
   ENEMY_CONTROLLER: {fileID: 6536727074140961286, guid: 3b30ff45a31903647b7259e6ddf85d67, type: 3}
+  drop: {fileID: 8144813515241523677, guid: 9af06cf892fc85d4e8995a6bd1b8b254, type: 3}
+  _dropCount: 0
 --- !u!212 &1203768678
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1527,7 +1529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1326730172}
   - component: {fileID: 1326730173}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

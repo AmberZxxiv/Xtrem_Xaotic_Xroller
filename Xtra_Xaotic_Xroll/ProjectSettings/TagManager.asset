@@ -8,6 +8,7 @@ TagManager:
   - YOURBASE
   - ENEMYBASE
   - ENEMY
+  - DROP
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Water
   - UI
   - ENEMY
-  - 
+  - PLAYER
   - 
   - 
   - 

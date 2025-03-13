@@ -20,6 +20,6 @@ public class ENEMY_SPAWNER : MonoBehaviour
     public void GenerateEnemy()
     {
         // Generar el enemigo en la posición del spawner
-        Instantiate(enemyprefab, transform.position, Quaternion.identity);
+        Instantiate(enemyprefab, transform.position, Quaternion.identity);       
     }
 }

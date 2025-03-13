@@ -21,8 +21,8 @@ public class PLAYER_MOVEMENT : MonoBehaviour
     public TextMeshProUGUI locationText;
     public GameObject playerWeapon;
     public ENEMY_CONTROLLER ENEMY_CONTROLLER;
-    //int _coins;
-    //int _totalCoins;
+    public GameObject drop;
+    public int _dropCount;
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +86,12 @@ public class PLAYER_MOVEMENT : MonoBehaviour
             print("BONK");
             other.gameObject.GetComponent<ENEMY_CONTROLLER>().GetDamage();
             //aqui si deja apretao se ejecuta 1000 veces por segundo, añade algun tipo de cooldown crack
+        }
+        if (other.tag == "DROP")
+        {
+            _dropCount += 10;
+            print(_dropCount);
+            Destroy(drop);
         }
     }
     //public void OnCollisionEnter2D(Collision2D collision)
