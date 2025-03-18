@@ -11,7 +11,6 @@ public class ENEMY_SPAWNER : MonoBehaviour
     void Start()
     {
         InvokeRepeating("GenerateEnemy", 0f, generationTime);
-        allyBase = new GameObject("ALLY BASE");
     }
 
     // Update is called once per frame

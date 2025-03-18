@@ -18,8 +18,9 @@ public class ENEMY_CONTROLLER : MonoBehaviour
         if (enemyHealth <= 0)
         {
             //aqui agrega cosas de soltar objetos y dineros y eso, se hace antes de que se destruya el objeto
-            //Instantiate(drop, transform.position, Quaternion.identity); NO LO ACTIVES QUE SPAWNEA SIN PARAR
-            Destroy(gameObject);
+            //Instantiate(drop, transform.position, Quaternion.identity); NO LO ACTIVES QUE SPAWNEA SIN 
+            StartCoroutine(Dropear());
+
         }
 
     }
@@ -33,6 +34,13 @@ public class ENEMY_CONTROLLER : MonoBehaviour
         // Generar drop en la posición del enemigo
         Instantiate(drop, transform.position, Quaternion.identity);
     }
-
+    private IEnumerator Dropear()
+    {
+        yield return new WaitForSeconds(0.2f);
+        print("mecago");
+        GenerateDrop();
+        Instantiate(drop, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
 
 }
