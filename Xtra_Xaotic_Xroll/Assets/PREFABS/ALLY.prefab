@@ -10,15 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2179709156675485909}
   - component: {fileID: 342220620871297373}
-  - component: {fileID: 473242320258024842}
   - component: {fileID: 6536727074140961286}
   - component: {fileID: 4453247199849713804}
   - component: {fileID: 8305557815353643887}
   - component: {fileID: 3252953367104163268}
-  - component: {fileID: 2822943218851703741}
+  - component: {fileID: 501512508589025078}
   m_Layer: 6
-  m_Name: ENEMY
-  m_TagString: ENEMY
+  m_Name: ALLY
+  m_TagString: ALLY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.6037736, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.60784316, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -90,21 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &473242320258024842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6613056531322343589}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88f4fdcdd406f314480e6b0139bcf696, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allyTroop: []
-  allyBase: {fileID: 0}
-  movSpeed: 0
 --- !u!114 &6536727074140961286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +200,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &2822943218851703741
+--- !u!114 &501512508589025078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,5 +212,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb2016d845d00748a3c42fa24f300f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 3
-  allySpeed: 2
+  enemySpeed: 0
+  allySpeed: 0

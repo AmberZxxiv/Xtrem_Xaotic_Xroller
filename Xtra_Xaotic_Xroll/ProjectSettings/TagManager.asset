@@ -9,6 +9,7 @@ TagManager:
   - ENEMYBASE
   - ENEMY
   - DROP
+  - ALLY
   layers:
   - Default
   - TransparentFX
