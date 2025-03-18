@@ -5,12 +5,22 @@ using UnityEngine;
 public class ENEMY_CONTROLLER : MonoBehaviour
 {
     public float enemyHealth;
+<<<<<<< Updated upstream
     public string targetTag = "YourBase"; // Tag del objetivo (la base)
     public float moveSpeed = 3f; // Velocidad de movimiento
     public float attackRange = 1.5f; // Rango de ataque
     public float attackCooldown = 1f; // Tiempo entre ataques
     private float lastAttackTime = 0f; // Tiempo del último ataque
     private Transform targetPosition; // Posición a la que se moverá el enemigo
+=======
+    public GameObject drop;  // Prefab del drop
+    public GameObject projectilePrefab; // Prefab del proyectil
+    public Transform shootingPoint; // Punto desde el cual se disparan los proyectiles
+    public float shootingCooldown = 2f; // Tiempo de espera entre disparos
+    private float lastShotTime = 0f; // Última vez que se disparó un proyectil
+
+    private bool hasDropped = false; // Variable para verificar si el drop ya fue generado
+>>>>>>> Stashed changes
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +43,7 @@ public class ENEMY_CONTROLLER : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
         // Verificar la salud del enemigo
         if (enemyHealth <= 0)
         {
@@ -74,6 +85,32 @@ public class ENEMY_CONTROLLER : MonoBehaviour
             lastAttackTime = Time.time;
 
             // Aquí podrías agregar más lógica para aplicar daño, como un sistema de salud al objetivo
+=======
+        // Verificar si el enemigo puede disparar
+        if (Time.time - lastShotTime >= shootingCooldown)
+        {
+            Shoot();
+            lastShotTime = Time.time; // Actualiza el tiempo del último disparo
+        }
+
+        // Verificar la salud del enemigo
+        if (enemyHealth <= 0 && !hasDropped) // Verifica si el enemigo debe morir
+        {
+            // Antes de destruir al enemigo, generamos los drops
+            GenerateDrop();
+            hasDropped = true; // Marca que el drop ha sido generado
+            Destroy(gameObject); // Eliminar al enemigo
+        }
+    }
+
+    // Método para disparar el proyectil
+    void Shoot()
+    {
+        if (projectilePrefab != null && shootingPoint != null)
+        {
+            // Crear el proyectil en el punto de disparo
+            Instantiate(projectilePrefab, shootingPoint.position, Quaternion.identity);
+>>>>>>> Stashed changes
         }
     }
 
@@ -81,6 +118,29 @@ public class ENEMY_CONTROLLER : MonoBehaviour
     public void GetDamage()
     {
         enemyHealth -= 2;
+<<<<<<< Updated upstream
         Debug.Log("El enemigo ha recibido daño. Salud restante: " + enemyHealth);
     }
+=======
+        // Solo generar drop si la salud llega a 0 y no se ha generado un drop aún
+        if (enemyHealth <= 0 && !hasDropped)
+        {
+            GenerateDrop();
+            hasDropped = true; // Marca que el drop ha sido generado
+            Destroy(gameObject); // Eliminar al enemigo
+        }
+    }
+
+    // Método para generar el drop cuando el enemigo es destruido
+    public void GenerateDrop()
+    {
+        if (drop != null)
+        {
+            // Generar el drop en la posición del enemigo
+            Instantiate(drop, transform.position, Quaternion.identity);
+        }
+    }
+>>>>>>> Stashed changes
 }
+
+

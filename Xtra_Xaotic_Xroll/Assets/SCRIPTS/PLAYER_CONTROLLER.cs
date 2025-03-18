@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,11 +7,8 @@ using TMPro;
 
 public class PLAYER_MOVEMENT : MonoBehaviour
 {
-    //public GameObject CoinVaso;
-    //public GameObject Ganar;
-    //public GameObject Flag;
-    public float vel;
-    public float jumpForce;
+    public float vel; // Velocidad de movimiento
+    public float jumpForce; // Fuerza de salto
     int _jumpCount;
     Rigidbody2D _rb;
     public GameObject vaultmenu;
@@ -28,11 +24,7 @@ public class PLAYER_MOVEMENT : MonoBehaviour
     void Start()
     {
         vaultmenu.SetActive(false);
-        //Ganar.SetActive(false);
-        //Flag.SetActive(false);
         _rb = GetComponent<Rigidbody2D>();
-        //_totalCoins = CoinVaso.transform.childCount;
-
     }
 
     // Update is called once per frame
@@ -41,19 +33,40 @@ public class PLAYER_MOVEMENT : MonoBehaviour
         playerPos = this.gameObject.transform.position.x;
         minimap.value = playerPos;
         locationText.text = playerPos.ToString("F0");
+
+        // Dirección de movimiento horizontal
         float direction = Input.GetAxis("Horizontal");
         _rb.velocity = new Vector2(vel * direction, _rb.velocity.y);
+
+        // Cambiar la orientación del sprite cuando el jugador cambia de dirección
+        if (direction != 0) // Solo cambia la orientación si se mueve
+        {
+            FlipSprite(direction);
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && _jumpCount <= 0)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
             _jumpCount++;
         }
-        else { }
-        //if (_coins == _totalCoins)
-        //{
-        //    Flag.SetActive(true);
-        
     }
+
+    // Método para cambiar la orientación del sprite
+    void FlipSprite(float direction)
+    {
+        // Si el jugador se mueve hacia la izquierda (dirección negativa)
+        if (direction < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1); // Invertir el sprite horizontalmente
+        }
+        // Si el jugador se mueve hacia la derecha (dirección positiva)
+        else if (direction > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1); // Restaurar la orientación original
+        }
+    }
+
+    // Métodos de colisión
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "SUELO")
@@ -65,6 +78,7 @@ public class PLAYER_MOVEMENT : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "YOURBASE")
@@ -72,6 +86,7 @@ public class PLAYER_MOVEMENT : MonoBehaviour
             vaultmenu.SetActive(true);
         }
     }
+
     public void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "YOURBASE")
@@ -79,40 +94,42 @@ public class PLAYER_MOVEMENT : MonoBehaviour
             vaultmenu.SetActive(false);
         }
     }
+
     public void OnTriggerStay2D(Collider2D other)
     {
-        if(other.tag == "ENEMY" && Input.GetMouseButton(0)) 
+        if (other.tag == "ENEMY" && Input.GetMouseButton(0))
         {
             print("BONK");
             other.gameObject.GetComponent<ENEMY_CONTROLLER>().GetDamage();
-            //aqui si deja apretao se ejecuta 1000 veces por segundo, añade algun tipo de cooldown crack
         }
     }
-    //public void OnCollisionEnter2D(Collision2D collision)
-    //{
-
-    //if (collision.collider.tag == "SPIKE")
-    //{
-    //    SceneManager.LoadScene(0);
-    //}
-    //if (collision.collider.tag == "MUELTE")
-    //{
-    //    SceneManager.LoadScene(0);
-    //}
-
-    //}
-    //public void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.tag == "COIN")
-    //    {
-    //        _coins++;
-    //        Destroy(collision.gameObject);
-    //    }
-    //    if (collision.tag == "FLAG")
-    //    {
-    //        print("GANASTE NEN@");
-    //        SceneManager.LoadScene(0);
-    //        Ganar.SetActive(true);
-    //    }
-    //}
 }
+
+//public void OnCollisionEnter2D(Collision2D collision)
+//{
+
+//if (collision.collider.tag == "SPIKE")
+//{
+//    SceneManager.LoadScene(0);
+//}
+//if (collision.collider.tag == "MUELTE")
+//{
+//    SceneManager.LoadScene(0);
+//}
+
+//}
+//public void OnTriggerEnter2D(Collider2D collision)
+//{
+//    if (collision.tag == "COIN")
+//    {
+//        _coins++;
+//        Destroy(collision.gameObject);
+//    }
+//    if (collision.tag == "FLAG")
+//    {
+//        print("GANASTE NEN@");
+//        SceneManager.LoadScene(0);
+//        Ganar.SetActive(true);
+//    }
+//}
+
