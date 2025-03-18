@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI; // Para actualizar la UI si usas un Text para mostrar la moneda
 using TMPro;
-
 public class CurrencyManager : MonoBehaviour
 {
     public int currency = 5;  // Cantidad inicial de monedas
