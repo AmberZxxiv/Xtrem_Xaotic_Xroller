@@ -5,82 +5,42 @@ using UnityEngine;
 public class ENEMY_CONTROLLER : MonoBehaviour
 {
     public float enemyHealth;
-    public string targetTag = "YourBase"; // Tag del objetivo (la base)
-    public float moveSpeed = 3f; // Velocidad de movimiento
-    public float attackRange = 1.5f; // Rango de ataque
-    public float attackCooldown = 1f; // Tiempo entre ataques
-    private float lastAttackTime = 0f; // Tiempo del último ataque
-    private Transform targetPosition; // Posición a la que se moverá el enemigo
-
+    public GameObject drop;
     // Start is called before the first frame update
     void Start()
     {
         enemyHealth = 10;
-
-        // Buscar el GameObject con el tag "YourBase" y obtener su Transform
-        GameObject targetObject = GameObject.FindGameObjectWithTag(targetTag);
-
-        if (targetObject != null)
-        {
-            targetPosition = targetObject.transform; // Asignar la posición de la base
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró un objeto con el tag 'YourBase'.");
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Verificar la salud del enemigo
         if (enemyHealth <= 0)
         {
-            Destroy(gameObject); // Eliminar el enemigo si su salud es 0 o menos
+            //aqui agrega cosas de soltar objetos y dineros y eso, se hace antes de que se destruya el objeto
+            //Instantiate(drop, transform.position, Quaternion.identity); NO LO ACTIVES QUE SPAWNEA SIN 
+            StartCoroutine(Dropear());
+
         }
 
-        // Asegurarse de que el objetivo haya sido encontrado
-        if (targetPosition != null)
-        {
-            // Mover al enemigo hacia la posición de destino
-            MoveTowardsTarget();
-
-            // Comprobar si está en rango de ataque y puede atacar
-            if (Vector3.Distance(transform.position, targetPosition.position) <= attackRange)
-            {
-                Attack();
-            }
-        }
     }
 
-    // Método para mover al enemigo hacia la posición del objetivo
-    private void MoveTowardsTarget()
-    {
-        // Mover al enemigo hacia la posición de destino
-        Vector3 direction = (targetPosition.position - transform.position).normalized;
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition.position, moveSpeed * Time.deltaTime);
-    }
-
-    // Método de ataque
-    private void Attack()
-    {
-        // Comprobar si el enemigo puede atacar (si ha pasado el tiempo de cooldown)
-        if (Time.time - lastAttackTime >= attackCooldown)
-        {
-            // Realizar el ataque
-            Debug.Log("¡El enemigo ataca!");
-
-            // Actualizar el tiempo del último ataque
-            lastAttackTime = Time.time;
-
-            // Aquí podrías agregar más lógica para aplicar daño, como un sistema de salud al objetivo
-        }
-    }
-
-    // Método para recibir daño
     public void GetDamage()
     {
         enemyHealth -= 2;
-        Debug.Log("El enemigo ha recibido daño. Salud restante: " + enemyHealth);
     }
+    public void GenerateDrop()
+    {
+        // Generar drop en la posición del enemigo
+        Instantiate(drop, transform.position, Quaternion.identity);
+    }
+    private IEnumerator Dropear()
+    {
+        yield return new WaitForSeconds(0.2f);
+        print("mecago");
+        GenerateDrop();
+        Instantiate(drop, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
 }

@@ -6,6 +6,7 @@ public class ENEMY_SPAWNER : MonoBehaviour
 {
     public GameObject enemyprefab;
     public float generationTime = 5f;
+    public GameObject allyBase;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,6 @@ public class ENEMY_SPAWNER : MonoBehaviour
     public void GenerateEnemy()
     {
         // Generar el enemigo en la posición del spawner
-        Instantiate(enemyprefab, transform.position, Quaternion.identity);
+        Instantiate(enemyprefab, transform.position, Quaternion.identity);       
     }
 }
