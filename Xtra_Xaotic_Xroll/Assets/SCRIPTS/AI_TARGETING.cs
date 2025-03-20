@@ -13,11 +13,11 @@ public class AI_TARGETING : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CompareTag("ENEMY"))
+        if (CompareTag("ENEMY")) // Comportamientos de enemigos
         {
         this.gameObject.transform.Translate(-2 * Time.deltaTime, 0, 0);
         }
-        if (CompareTag("ALLY"))
+        if (CompareTag("ALLY")) // Comportamietos de aliados
         {
             this.gameObject.transform.Translate(2 * Time.deltaTime, 0, 0);
         }

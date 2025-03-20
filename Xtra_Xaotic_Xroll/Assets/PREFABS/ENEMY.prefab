@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2179709156675485909}
   - component: {fileID: 342220620871297373}
-  - component: {fileID: 473242320258024842}
-  - component: {fileID: 6536727074140961286}
   - component: {fileID: 4453247199849713804}
   - component: {fileID: 8305557815353643887}
   - component: {fileID: 3252953367104163268}
   - component: {fileID: 2822943218851703741}
+  - component: {fileID: 566549378070438511}
   m_Layer: 6
   m_Name: ENEMY
   m_TagString: ENEMY
@@ -90,35 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &473242320258024842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6613056531322343589}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88f4fdcdd406f314480e6b0139bcf696, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allyTroop: []
-  allyBase: {fileID: 0}
-  movSpeed: 0
---- !u!114 &6536727074140961286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6613056531322343589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e7818e5b78ee7f4bb2c760dd3b821f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyHealth: 10
-  drop: {fileID: 8144813515241523677, guid: 9af06cf892fc85d4e8995a6bd1b8b254, type: 3}
 --- !u!70 &4453247199849713804
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -228,5 +198,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb2016d845d00748a3c42fa24f300f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 3
-  allySpeed: 2
+--- !u!114 &566549378070438511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6613056531322343589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7818e5b78ee7f4bb2c760dd3b821f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minionHealth: 10
+  drop: {fileID: 8144813515241523677, guid: 9af06cf892fc85d4e8995a6bd1b8b254, type: 3}
