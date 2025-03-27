@@ -13,7 +13,7 @@ public class Player_Controller : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Transform firePoint; // Un GameObject vacío donde se originan las balas
-    public float fireRate = 0.1f;
+    public float fireRate = 0.1f; // Tasa de disparo (tiempo entre disparos)
     private float nextFireTime = 0f;
 
     void Start()
@@ -41,12 +41,14 @@ public class Player_Controller : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
-        if (Input.GetKey(KeyCode.Return) && Time.time >= nextFireTime)
+        // Disparar continuamente mientras el clic izquierdo esté presionado
+        if (Input.GetMouseButton(0) && Time.time >= nextFireTime) // Botón izquierdo del ratón
         {
             Shoot();
-            nextFireTime = Time.time + fireRate;
+            nextFireTime = Time.time + fireRate; // Establece el tiempo para el siguiente disparo
         }
 
+        // Si se mantiene presionado LeftShift, el jugador se detiene
         if (Input.GetKey(KeyCode.LeftShift))
         {
             actualSpeed = 0;
@@ -60,7 +62,7 @@ public class Player_Controller : MonoBehaviour
     // Comprueba si el jugador está en contacto con el suelo mediante colisiones
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // El suelo debe tener la etiqueta "Ground"
+        // El suelo debe tener la etiqueta "Floor"
         if (collision.gameObject.CompareTag("Floor"))
         {
             isGrounded = true;
@@ -78,26 +80,18 @@ public class Player_Controller : MonoBehaviour
 
     void Shoot()
     {
+        // Obtener la posición del ratón en el mundo
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; // Asegurarse de que esté en el mismo plano 2D
+
+        // Crear la bala en la posición del jugador (o firePoint si lo prefieres)
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Bullet bulletScript = bullet.GetComponent<Bullet>();
 
-        // Dirección predeterminada basada en el último movimiento
-        Vector2 shootDirection = lastMoveDirection;
+        // Calcular la dirección desde el jugador hacia el ratón
+        Vector2 shootDirection = (mousePosition - firePoint.position).normalized;
 
-        // Detectar combinaciones de teclas para disparo en diagonal
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-            shootDirection = new Vector2(1, 1).normalized; // Arriba-Derecha
-        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
-            shootDirection = new Vector2(-1, 1).normalized; // Arriba-Izquierda
-        else if (Input.GetKey(KeyCode.W))
-            shootDirection = Vector2.up;
-        else if (Input.GetKey(KeyCode.S))
-            shootDirection = Vector2.down;
-        else if (Input.GetKey(KeyCode.A))
-            shootDirection = Vector2.left;
-        else if (Input.GetKey(KeyCode.D))
-            shootDirection = Vector2.right;
-
+        // Asignar la dirección de la bala
         bulletScript.direction = shootDirection;
     }
 }
