@@ -18,13 +18,22 @@ public class Bullet : MonoBehaviour
         transform.position += (Vector3)direction * speed * Time.deltaTime;
     }
 
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.CompareTag("Enemy"))
-    //    {
-    //        Destroy(gameObject);
-    //        // Aquí puedes agregar daño al enemigo
-    //    }
-    //}
+    // Detección de colisión
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Boss"))  // Si colisiona con el Boss
+        {
+            // Accedemos al script del Boss y le aplicamos daño
+            Boss_Ruleta_Mecanics boss = other.GetComponent<Boss_Ruleta_Mecanics>();
+            if (boss != null)
+            {
+                boss.TakeDamage(1);  // El daño que recibe el Boss (1 vida por bala)
+            }
+
+            // Destruir la bala al colisionar
+            Destroy(gameObject);
+        }
+    }
 }
+
 
