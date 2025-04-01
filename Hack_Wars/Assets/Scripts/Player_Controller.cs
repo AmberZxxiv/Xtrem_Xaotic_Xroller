@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,8 +18,16 @@ public class Player_Controller : MonoBehaviour
     public Transform firePoint; // Un GameObject vacío donde se originan las balas
     public float fireRate = 0.1f; // Tiempo entre disparo
     private float nextFireTime = 0f;
+
     public float vidasPlayer;
     public Slider playerHealth;
+    public Slider bossHealth;
+    public int tokenCount;
+    public TextMeshProUGUI tokenInventory;
+    public bool premio1;
+    public bool premio2;
+    public bool premio3;
+    public bool premio4;
 
     void Start()
     {
@@ -26,6 +35,9 @@ public class Player_Controller : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         actualSpeed = setSpeed;
         vidasPlayer = 5;
+        premio1 = false;
+        premio2 = false;
+        premio3 = false;
     }
 
     void Update()
@@ -67,6 +79,26 @@ public class Player_Controller : MonoBehaviour
         if(vidasPlayer == 0)
         {
             SceneManager.LoadScene(0);
+        }
+
+        // Le da tokens al jugador cuando llega a X vida del boss
+        if (bossHealth.value <= 66 && premio1 == false)
+        {
+            tokenCount++;
+            premio1 = true;
+            tokenInventory.text = tokenCount.ToString("Tokens = "+tokenCount);
+        }
+        if (bossHealth.value <= 33 && premio2 == false)
+        {
+            tokenCount++;
+            premio2 = true;
+            tokenInventory.text = tokenCount.ToString("Tokens = " + tokenCount);
+        }
+        if (bossHealth.value <= 0 && premio3 == false)
+        {
+            tokenCount++;
+            premio3 = true;
+            tokenInventory.text = tokenCount.ToString("Tokens = " + tokenCount);
         }
     }
 
