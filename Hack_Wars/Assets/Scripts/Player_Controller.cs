@@ -28,6 +28,7 @@ public class Player_Controller : MonoBehaviour
     public bool premio2;
     public bool premio3;
     public bool premio4;
+    public int token_YoN;
 
     void Start()
     {
@@ -100,6 +101,10 @@ public class Player_Controller : MonoBehaviour
             premio3 = true;
             tokenInventory.text = tokenCount.ToString("Tokens = " + tokenCount);
         }
+    }
+    public void TokenBoss()
+    {
+        token_YoN = Random.Range(1,2);
     }
 
     // Comprueba si el jugador está en contacto con el suelo mediante colisiones

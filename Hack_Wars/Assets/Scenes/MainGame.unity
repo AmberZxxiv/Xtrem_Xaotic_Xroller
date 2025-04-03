@@ -837,6 +837,7 @@ MonoBehaviour:
   premio2: 0
   premio3: 0
   premio4: 0
+  token_YoN: 0
 --- !u!50 &286893034
 Rigidbody2D:
   serializedVersion: 4
@@ -2095,6 +2096,7 @@ RectTransform:
   m_Children:
   - {fileID: 1703008840}
   - {fileID: 2114729862}
+  - {fileID: 2010294045}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2178,12 +2180,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zonaApuesta: {fileID: 2114729861}
-  timeChange: 5
   rojo: 0
   negro: 0
   verde: 0
   apuestaHecha: 0
   result: 3
+  player_Controller: {fileID: 286893033}
+  Boss_Codigo: {fileID: 0}
 --- !u!1 &1567860494
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,13 +3482,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010294044}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.2638876, y: 0.9293, z: 0.9293}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1574957083}
-  m_Father: {fileID: 2114729862}
+  m_Father: {fileID: 1563342462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3699,7 +3702,6 @@ RectTransform:
   - {fileID: 1847863820}
   - {fileID: 1218115756}
   - {fileID: 330557495}
-  - {fileID: 2010294045}
   m_Father: {fileID: 1563342462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
