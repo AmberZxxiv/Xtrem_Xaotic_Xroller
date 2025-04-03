@@ -8,6 +8,7 @@ public class Boss_Ruleta_Mecanics : MonoBehaviour
     public float speed = 4f;
     public float minX = -9.5f, maxX = 9.5f;
     public int health = 100;  // Salud del Boss
+    public int damage;
 
     public Slider healthSlider;  // Referencia al Slider de la barra de vida
 

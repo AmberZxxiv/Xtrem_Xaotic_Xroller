@@ -102,10 +102,6 @@ public class Player_Controller : MonoBehaviour
             tokenInventory.text = tokenCount.ToString("Tokens = " + tokenCount);
         }
     }
-    public void TokenBoss()
-    {
-        token_YoN = Random.Range(1,2);
-    }
 
     // Comprueba si el jugador está en contacto con el suelo mediante colisiones
     void OnCollisionEnter2D(Collision2D collision)

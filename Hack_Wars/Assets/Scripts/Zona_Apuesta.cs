@@ -37,6 +37,7 @@ public class Zona_Apuesta : MonoBehaviour
                 negro = false;
                 verde = false;
                 apuestaHecha = false;
+            player_Controller.vidasPlayer++;
             }
             if (negro == true && result == 2)
             {
@@ -46,6 +47,7 @@ public class Zona_Apuesta : MonoBehaviour
                 negro = false;
                 verde = false;
                 apuestaHecha = false;
+            Boss_Codigo.damage++;
             }
             if (verde == true && result == 3)
             {
@@ -55,6 +57,8 @@ public class Zona_Apuesta : MonoBehaviour
                 negro = false;
                 verde = false;
                 apuestaHecha = false;
+            player_Controller.setSpeed++;
+            //SUMAR VELOCIDAD DE MOVIMIENTO
             }
             else
             {
