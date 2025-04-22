@@ -6,6 +6,8 @@ using UnityEngine;
 public class Zona_Apuesta : MonoBehaviour
 {
     public GameObject zonaApuesta;
+    public GameObject apuestaWon;
+    public GameObject apuestaLost;
     int timeChange = 15; // tiempo cada que se activa el modo apuesta
     public bool rojo;
     public bool negro;
@@ -20,6 +22,8 @@ public class Zona_Apuesta : MonoBehaviour
     {
         zonaApuesta.SetActive(false);
         StartCoroutine(TimeApuesta());
+        apuestaWon.SetActive(false);
+        apuestaLost.SetActive(false);
         apuestaHecha = false;
         rojo = false;
         negro = false;
@@ -37,6 +41,7 @@ public class Zona_Apuesta : MonoBehaviour
                 negro = false;
                 verde = false;
                 apuestaHecha = false;
+            apuestaWon.SetActive(true);
             player_Controller.vidasPlayer++;
             }
             if (negro == true && result == 2)
@@ -47,6 +52,7 @@ public class Zona_Apuesta : MonoBehaviour
                 negro = false;
                 verde = false;
                 apuestaHecha = false;
+            apuestaWon.SetActive(true);
             Boss_Codigo.damage++;
             }
             if (verde == true && result == 3)
@@ -57,6 +63,7 @@ public class Zona_Apuesta : MonoBehaviour
                 negro = false;
                 verde = false;
                 apuestaHecha = false;
+            apuestaWon.SetActive(true);
             player_Controller.setSpeed++;
             //SUMAR VELOCIDAD DE MOVIMIENTO
             }
@@ -88,6 +95,8 @@ public class Zona_Apuesta : MonoBehaviour
         player_Controller.tokenInventory.text = player_Controller.tokenCount.ToString("Tokens = " + player_Controller.tokenCount);
         zonaApuesta.SetActive(false);
         Time.timeScale = 1;
+            apuestaLost.SetActive(false);
+            apuestaWon.SetActive(false);
         StartCoroutine(TimeApuesta());
         }
     }
