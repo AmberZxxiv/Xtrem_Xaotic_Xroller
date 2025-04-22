@@ -324,6 +324,4 @@ public class Boss_Ruleta_Mecanics : MonoBehaviour
     //}
 }
 
-}
-
 
