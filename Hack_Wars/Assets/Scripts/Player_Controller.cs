@@ -14,6 +14,7 @@ public class Player_Controller : MonoBehaviour
     private bool isGrounded = false; // Indica si el jugador está en el suelo
     private Vector2 lastMoveDirection = Vector2.right; // Última dirección de movimiento
 
+    public Animator animator;
     public GameObject bulletPrefab;
     public Transform firePoint; // Un GameObject vacío donde se originan las balas
     public float fireRate = 0.1f; // Tiempo entre disparo
@@ -32,8 +33,9 @@ public class Player_Controller : MonoBehaviour
 
     void Start()
     {
-        // Obtiene el componente Rigidbody2D del jugador
+        // Obtiene los componentes del jugador
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         actualSpeed = setSpeed;
         vidasPlayer = 5;
         premio1 = false;
@@ -64,6 +66,7 @@ public class Player_Controller : MonoBehaviour
         // Disparar continuamente mientras el clic izquierdo esté presionado
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime) // Botón izquierdo del ratón
         {
+            animator.SetTrigger("Shot");
             Shoot();
             nextFireTime = Time.time + fireRate; // Establece el tiempo para el siguiente disparo
         }

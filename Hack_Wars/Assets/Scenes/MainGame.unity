@@ -804,6 +804,7 @@ GameObject:
   - component: {fileID: 286893035}
   - component: {fileID: 286893034}
   - component: {fileID: 286893037}
+  - component: {fileID: 286893038}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -904,6 +905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setSpeed: 15
   jumpForce: 30
+  animator: {fileID: 0}
   bulletPrefab: {fileID: 6454736289229881992, guid: 44c9b7576ff40f146ab5c3f6f849151d, type: 3}
   firePoint: {fileID: 286893036}
   fireRate: 0.1
@@ -917,6 +919,27 @@ MonoBehaviour:
   premio3: 0
   premio4: 0
   token_YoN: 0
+--- !u!95 &286893038
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286893032}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 800ec30d976e4094bb3595819eaeb49c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &330557494
 GameObject:
   m_ObjectHideFlags: 0
