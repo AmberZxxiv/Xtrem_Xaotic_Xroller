@@ -1074,7 +1074,6 @@ GameObject:
   - component: {fileID: 286893035}
   - component: {fileID: 286893034}
   - component: {fileID: 286893037}
-  - component: {fileID: 286893038}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1175,6 +1174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setSpeed: 15
   jumpForce: 30
+  pause: {fileID: 1034033621}
   animator: {fileID: 0}
   bulletPrefab: {fileID: 6454736289229881992, guid: 44c9b7576ff40f146ab5c3f6f849151d, type: 3}
   firePoint: {fileID: 286893036}
@@ -1189,27 +1189,6 @@ MonoBehaviour:
   premio3: 0
   premio4: 0
   token_YoN: 0
---- !u!95 &286893038
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286893032}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 800ec30d976e4094bb3595819eaeb49c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &289307458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2086,6 +2065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 539314674}
   - component: {fileID: 539314675}
+  - component: {fileID: 539314676}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -2160,6 +2140,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &539314676
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539314673}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 800ec30d976e4094bb3595819eaeb49c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &577808082
 GameObject:
   m_ObjectHideFlags: 0
@@ -15669,7 +15670,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1882542195}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 286893037}
+        m_TargetAssemblyTypeName: Player_Controller, Assembly-CSharp
+        m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1882542195
 MonoBehaviour:
   m_ObjectHideFlags: 0

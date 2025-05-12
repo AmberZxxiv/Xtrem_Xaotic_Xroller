@@ -14,11 +14,16 @@ public class Player_Controller : MonoBehaviour
     private bool isGrounded = false; // Indica si el jugador está en el suelo
     private Vector2 lastMoveDirection = Vector2.right; // Última dirección de movimiento
 
+    public GameObject pause;
+    private GameObject victory;
+    private GameObject dead;
     public Animator animator;
     public GameObject bulletPrefab;
     public Transform firePoint; // Un GameObject vacío donde se originan las balas
     public float fireRate = 0.1f; // Tiempo entre disparo
     private float nextFireTime = 0f;
+
+    SpriteRenderer playerSpriteRenderer;
 
     public float vidasPlayer;
     public Slider playerHealth;
@@ -35,17 +40,26 @@ public class Player_Controller : MonoBehaviour
     {
         // Obtiene los componentes del jugador
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        playerSpriteRenderer = transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>();
+        animator = transform.GetChild(1).gameObject.GetComponent<Animator>();
         actualSpeed = setSpeed;
         vidasPlayer = 5;
         premio1 = false;
         premio2 = false;
         premio3 = false;
+        pause.SetActive(false);
+        dead.SetActive(false);
+        victory.SetActive(false);
     }
 
     void Update()
     {
-       
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            pause.SetActive(true);
+        }
+
         // Movimiento horizontal
         float moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * actualSpeed, rb.velocity.y);
@@ -53,13 +67,35 @@ public class Player_Controller : MonoBehaviour
 
         // Actualizar la última dirección de movimiento si hay input del jugador
         if (moveInput > 0)
-            lastMoveDirection = Vector2.right;
-        else if (moveInput < 0)
-            lastMoveDirection = Vector2.left;
+        {
+            if (animator.GetBool("Walking") == false)
+            {
+                animator.SetBool("Walking", true);
+            }
+            if (!playerSpriteRenderer.flipX)
+            {
 
+                playerSpriteRenderer.flipX = true;
+            }
+            lastMoveDirection = Vector2.right;
+        }
+        else if (moveInput < 0)
+        {
+            if (animator.GetBool("Walking") == false)
+            {
+                animator.SetBool("Walking", true);
+            }
+            if (playerSpriteRenderer.flipX)
+            {
+
+                playerSpriteRenderer.flipX = false;
+            }
+            lastMoveDirection = Vector2.left;
+        }
         // Salto: se activa cuando se presiona la tecla "Salto" y el jugador está en el suelo
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            animator.SetTrigger("Jumping");
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
@@ -110,7 +146,7 @@ public class Player_Controller : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // El suelo debe tener la etiqueta "Ground"
-        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Boss"))
+        if (collision.gameObject.CompareTag("Floor") )
         {
             isGrounded = true;
         }
@@ -125,7 +161,7 @@ public class Player_Controller : MonoBehaviour
     // Cuando el jugador deja de estar en contacto con el suelo, se marca como no en el suelo
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Boss"))
+        if (collision.gameObject.CompareTag("Floor"))
         {
             isGrounded = false;
         }
@@ -135,6 +171,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("BossWeapon"))
         {
+            animator.SetTrigger("Damaged");
             vidasPlayer--;
         }
     }
@@ -155,5 +192,11 @@ public class Player_Controller : MonoBehaviour
         // Asignar la dirección de la bala
         bulletScript.direction = shootDirection;
 
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        pause.SetActive(false);
     }
 }
