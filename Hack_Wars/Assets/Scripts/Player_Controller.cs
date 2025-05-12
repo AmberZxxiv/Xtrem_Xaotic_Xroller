@@ -15,8 +15,8 @@ public class Player_Controller : MonoBehaviour
     private Vector2 lastMoveDirection = Vector2.right; // Última dirección de movimiento
 
     public GameObject pause;
-    private GameObject victory;
-    private GameObject dead;
+    public GameObject victory;
+    public GameObject dead;
     public Animator animator;
     public GameObject bulletPrefab;
     public Transform firePoint; // Un GameObject vacío donde se originan las balas
@@ -38,6 +38,7 @@ public class Player_Controller : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         // Obtiene los componentes del jugador
         rb = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>();
@@ -60,8 +61,14 @@ public class Player_Controller : MonoBehaviour
             pause.SetActive(true);
         }
 
-        // Movimiento horizontal
-        float moveInput = Input.GetAxis("Horizontal");
+        if (vidasPlayer <= 0)
+        {
+            Time.timeScale = 0;
+            dead.SetActive(true);
+        }
+
+            // Movimiento horizontal
+            float moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * actualSpeed, rb.velocity.y);
         playerHealth.value = vidasPlayer;
 
@@ -115,10 +122,6 @@ public class Player_Controller : MonoBehaviour
         else
         {
             actualSpeed = setSpeed;
-        }
-        if(vidasPlayer == 0)
-        {
-            SceneManager.LoadScene(0);
         }
 
         // Le da tokens al jugador cuando llega a X vida del boss
@@ -198,5 +201,11 @@ public class Player_Controller : MonoBehaviour
     {
         Time.timeScale = 1;
         pause.SetActive(false);
+    }
+
+    public void Restar()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
     }
 }

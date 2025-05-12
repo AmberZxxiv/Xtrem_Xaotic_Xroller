@@ -1175,6 +1175,8 @@ MonoBehaviour:
   setSpeed: 15
   jumpForce: 30
   pause: {fileID: 1034033621}
+  victory: {fileID: 1371954415}
+  dead: {fileID: 1513359969}
   animator: {fileID: 0}
   bulletPrefab: {fileID: 6454736289229881992, guid: 44c9b7576ff40f146ab5c3f6f849151d, type: 3}
   firePoint: {fileID: 286893036}
@@ -15211,7 +15213,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1824484850}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 286893037}
+        m_TargetAssemblyTypeName: Player_Controller, Assembly-CSharp
+        m_MethodName: Restar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1824484850
 MonoBehaviour:
   m_ObjectHideFlags: 0
