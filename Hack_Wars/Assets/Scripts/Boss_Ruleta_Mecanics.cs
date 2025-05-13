@@ -37,6 +37,7 @@ public class Boss_Ruleta_Mecanics : MonoBehaviour
 
     void Start()
     {
+        damage = 1f;
         phase1sprite.SetActive(false);
         phase2sprite.SetActive(false);
         phase3sprite.SetActive(false);
@@ -155,6 +156,7 @@ public class Boss_Ruleta_Mecanics : MonoBehaviour
             EnterPhaseFour();  // Llamamos al método para pasar a la fase 4
         }
     }
+
     // Método para hacer que el enemigo salte hacia la posición del jugador
     void PhaseThreeBehavior()
     {
@@ -294,34 +296,6 @@ public class Boss_Ruleta_Mecanics : MonoBehaviour
             EnterPhaseTwo();  // El Boss pasa a la fase 2 cuando su vida llega a 0
         }
     }
-
-    //Al final no conseguimos añadir la fase 3 porque para añadir las fisicas de salto hay que cambiar el rigidbody de kinematic a dynamic 
-    //y eso hace que en el resto fases no funcionen correctamente tambien hay que activar las variables que estan comentadas arriba del todo
-    //y en el inspector cambiar la jump force a 380
-    //void PhaseThreeBehavior()
-    //{
-    //    isJumping = true;
-
-    //    rb.velocity = new Vector2(rb.velocity.x, 0);
-    //    rb.AddForce(new Vector2(0, JumpForce));
-    //}
-    //void JumpToPlayer()
-    //{
-    //    isJumping = true;
-
-    //    rb.velocity = new Vector2(rb.velocity.x, 0);
-    //    rb.AddForce(new Vector2(0, JumpForce));
-    //}
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Floor"))
-    //    {
-    //        isJumping = false;
-
-    //        rb.velocity = new Vector2(rb.velocity.x, 0);
-    //    }
-    //}
 }
 
 

@@ -1,7 +1,9 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class Zona_Apuesta : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class Zona_Apuesta : MonoBehaviour
     public int result;
     public Player_Controller player_Controller;
     public Boss_Ruleta_Mecanics Boss_Codigo;
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +36,7 @@ public class Zona_Apuesta : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            if (rojo == true && result == 1)
+        if (rojo == true && result == 1)
             {
                 print("rojo"); //premio JIJI
                 result = 0;
@@ -43,6 +46,9 @@ public class Zona_Apuesta : MonoBehaviour
                 apuestaHecha = false;
             apuestaWon.SetActive(true);
             player_Controller.vidasPlayer++;
+            player_Controller.playerHealth.maxValue++;
+            player_Controller.maxVidas.text = player_Controller.playerHealth.maxValue.ToString("Max Vidas: " + player_Controller.playerHealth.maxValue);
+            player_Controller.vidas.text = player_Controller.vidasPlayer.ToString("Vidas: " + player_Controller.vidasPlayer);
             }
             if (negro == true && result == 2)
             {
@@ -51,9 +57,10 @@ public class Zona_Apuesta : MonoBehaviour
                 rojo = false;
                 negro = false;
                 verde = false;
-                apuestaHecha = false;
+                apuestaHecha = true;
             apuestaWon.SetActive(true);
             Boss_Codigo.damage++;
+            player_Controller.daño.text = player_Controller.Boss_Codigos.damage.ToString("Daño: " + player_Controller.Boss_Codigos.damage.ToString("F0"));
             }
             if (verde == true && result == 3)
             {
@@ -62,9 +69,10 @@ public class Zona_Apuesta : MonoBehaviour
                 rojo = false;
                 negro = false;
                 verde = false;
-                apuestaHecha = false;
+                apuestaHecha = true;
             apuestaWon.SetActive(true);
             player_Controller.setSpeed++;
+            player_Controller.velocidad.text = player_Controller.setSpeed.ToString("Velocidad: " + player_Controller.setSpeed.ToString("F0"));
             //SUMAR VELOCIDAD DE MOVIMIENTO
             }
             else
@@ -88,16 +96,34 @@ public class Zona_Apuesta : MonoBehaviour
     // Boton para pasar a la siguiente fase
     public void Next_Round () //puedes pasar a la siguiente ronda reseteando todos tus tokens(pagas por pasar de nivel :)
     {
-        if (player_Controller.tokenCount >= 3 || player_Controller.tokenCount == 0 || Boss_Codigo.health == 0)
+        if (player_Controller.tokenCount == 0 || Boss_Codigo.health == 0 )
         {
-        // cargar siguiente fase de boss
         player_Controller.tokenCount = 0;
+        // cargar siguiente fase de boss
         player_Controller.tokenInventory.text = player_Controller.tokenCount.ToString("Tokens = " + player_Controller.tokenCount);
         zonaApuesta.SetActive(false);
         Time.timeScale = 1;
             apuestaLost.SetActive(false);
             apuestaWon.SetActive(false);
+            apuestaHecha = false;
+            negro = false ;
+            rojo = false;
+            verde = false;
         StartCoroutine(TimeApuesta());
+        }
+        if(apuestaHecha == true && player_Controller.tokenCount>0)
+        {
+            // cargar siguiente fase de boss
+            player_Controller.tokenInventory.text = player_Controller.tokenCount.ToString("Tokens = " + player_Controller.tokenCount);
+            zonaApuesta.SetActive(false);
+            Time.timeScale = 1;
+            apuestaLost.SetActive(false);
+            apuestaWon.SetActive(false);
+            apuestaHecha = false;
+            negro = false;
+            rojo = false;
+            verde = false;
+            StartCoroutine(TimeApuesta());
         }
     }
 

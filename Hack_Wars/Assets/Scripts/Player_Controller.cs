@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,7 @@ public class Player_Controller : MonoBehaviour
     private float nextFireTime = 0f;
 
     SpriteRenderer playerSpriteRenderer;
+    public Boss_Ruleta_Mecanics Boss_Codigos;
 
     public float vidasPlayer;
     public Slider playerHealth;
@@ -35,22 +37,35 @@ public class Player_Controller : MonoBehaviour
     public bool premio3;
     public bool premio4;
     public int token_YoN;
+    private bool isInvulnerable = false;
+    public float invulnerabilityDuration = 2f;
+    public float flashSpeed = 10f;
+    public TextMeshProUGUI maxVidas;
+    public TextMeshProUGUI vidas;
+    public TextMeshProUGUI daño;
+    public TextMeshProUGUI velocidad;
 
     void Start()
     {
         Time.timeScale = 1;
+        setSpeed = 15f;
+        vidasPlayer = 5;
+        playerHealth.maxValue = vidasPlayer;
         // Obtiene los componentes del jugador
         rb = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>();
         animator = transform.GetChild(1).gameObject.GetComponent<Animator>();
         actualSpeed = setSpeed;
-        vidasPlayer = 5;
         premio1 = false;
         premio2 = false;
         premio3 = false;
         pause.SetActive(false);
         dead.SetActive(false);
         victory.SetActive(false);
+        maxVidas.text = playerHealth.maxValue.ToString("Max Vidas: " + playerHealth.maxValue);
+        vidas.text = vidasPlayer.ToString("Vidas: " + vidasPlayer);
+        velocidad.text = setSpeed.ToString("Velocidad: " + setSpeed.ToString("F0"));
+        daño.text = Boss_Codigos.damage.ToString("Daño: " + Boss_Codigos.damage.ToString("F0"));
     }
 
     void Update()
@@ -137,7 +152,7 @@ public class Player_Controller : MonoBehaviour
             premio2 = true;
             tokenInventory.text = tokenCount.ToString("Tokens = " + tokenCount);
         }
-        if (bossHealth.value <= 0 && premio3 == false)
+        if (bossHealth.value <= 1 && premio3 == false)
         {
             tokenCount++;
             premio3 = true;
@@ -156,7 +171,7 @@ public class Player_Controller : MonoBehaviour
 
         if (collision.gameObject.CompareTag("voidead"))
         {
-            vidasPlayer--;
+            vidasPlayer = 0;
             this.gameObject.transform.position = new Vector2(0,1);
         }
     }
@@ -172,10 +187,11 @@ public class Player_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("BossWeapon"))
+        if (collision.gameObject.CompareTag("BossWeapon") && !isInvulnerable)
         {
             animator.SetTrigger("Damaged");
             vidasPlayer--;
+            StartCoroutine(InvulnerabilityCoroutine());
         }
     }
 
@@ -208,4 +224,22 @@ public class Player_Controller : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
+    IEnumerator InvulnerabilityCoroutine()
+    {
+        if (!isInvulnerable)
+        {        
+            isInvulnerable = true;
+            float timer = 0f;
+
+            while (timer < invulnerabilityDuration)
+            {
+         
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            isInvulnerable = false;
+        }
+    }
+
 }
